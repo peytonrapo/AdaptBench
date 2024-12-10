@@ -8,11 +8,11 @@ import matplotlib.pyplot as plt
 # and chart_code
 def chart_decomposer(chart_img):
     # Get the underlying data of the chart
-    chart_data = call_gpt_chart_image(chart_img, chart_data_prompt, system_prompt)
+    chart_data = call_gpt_chart_image(chart_img, chart_data_prompt, chart_data_system_prompt)
     chart_data = clean_code(chart_data)
 
     # Get chart gen code from chart + the data table
-    chart_code = call_gpt_chart_image(chart_img, chart_code_prompt + chart_data, system_prompt)
+    chart_code = call_gpt_chart_image(chart_img, chart_code_prompt + chart_data, chart_code_system_prompt)
     chart_code = clean_code(chart_code)
 
     return chart_data, chart_code

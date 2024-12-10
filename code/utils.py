@@ -26,8 +26,18 @@ def call_gpt(prompt, system_prompt=None):
     ]
 
     if system_prompt:
-        messages = [
-            {
+        # messages = [
+        #     {
+        #         "role": "system",
+        #         "content": [
+        #             {
+        #             "type": "text",
+        #             "text": system_prompt
+        #             }
+        #         ]
+        #     }
+        # ] + messages
+        messages.append({
                 "role": "system",
                 "content": [
                     {
@@ -35,8 +45,7 @@ def call_gpt(prompt, system_prompt=None):
                     "text": system_prompt
                     }
                 ]
-            }
-        ] + messages
+            })
         
 
     response = client.chat.completions.create(
@@ -67,8 +76,18 @@ def call_gpt_chart_image(chart_img, prompt, system_prompt=None):
     ]
 
     if system_prompt:
-        messages = [
-            {
+        # messages = [
+        #     {
+        #         "role": "system",
+        #         "content": [
+        #             {
+        #             "type": "text",
+        #             "text": system_prompt
+        #             }
+        #         ]
+        #     }
+        # ] + messages
+        messages.append({
                 "role": "system",
                 "content": [
                     {
@@ -76,8 +95,7 @@ def call_gpt_chart_image(chart_img, prompt, system_prompt=None):
                     "text": system_prompt
                     }
                 ]
-            }
-        ] + messages
+            })
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
