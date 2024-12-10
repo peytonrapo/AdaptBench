@@ -11,4 +11,4 @@ question_template_prompt = "Parameterize this question for this chart so that it
 question_prompt = "Write the question for the given chart for which the following code is trying to answer. Output only the new question. Code: "
 
 # Create an answer_question function to answer the question for the chart
-answering_code_prompt = "Generate a function answer_question which takes in a numpy.array chart_data and returns the answer to the following question. Ensure the function has no syntax errors or missing parentheses. Output only the answer_question function. Question: "
+answering_code_prompt = "Generate a function answer_question which takes in a numpy.array chart_data and returns the answer to the following question. If the function has parameters other than chart_data, make them optional with a reasonable default value. Ensure the function has no syntax errors or missing parentheses. Output only the answer_question function. Question: "

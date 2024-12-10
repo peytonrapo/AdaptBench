@@ -14,8 +14,11 @@ for data in dataset["testmini"]:
         question_tuples.append(data)
 
 max_attempts = 10
+num_samples = 10
 
-for tuple_idx in r.sample(range(len(question_tuples)), 10):
+tuple_indices = r.sample(range(len(question_tuples)), num_samples)
+
+for tuple_idx in tuple_indices:
     old_chart = question_tuples[tuple_idx]['decoded_image']
     old_question = question_tuples[tuple_idx]['question']
     old_answer = question_tuples[tuple_idx]['answer']
@@ -32,10 +35,10 @@ for tuple_idx in r.sample(range(len(question_tuples)), 10):
 
     print(f"Question Tuple: {tuple_idx}")
     print("Original Question: " + old_question)
-    print("Original Answer:" + old_answer)
+    print("Original Answer:" + str(old_answer))
     old_chart.show()
 
     print()
     print("New Question: " + new_question)
-    print("New Answer: " + new_answer)
-    # show_chart_img(new_chart_img)
+    print("New Answer: " + str(new_answer))
+    show_chart_img(new_chart_img)
