@@ -1,3 +1,6 @@
+# Instructions for all GPT calls
+system_prompt = "Output only the question, data object, or function asked for."
+
 # creates chart_data object
 # chart_data_prompt = "Generate a numpy.array chart_data which contains the underlying data in this chart. Make the data as detailed as possible. Output only the chart_data object."
 chart_data_prompt = "Generate a pandas dataframe chart_data containing the data used to build the given chart. chart_data must be convertible to a numpy array. Output only chart_data."

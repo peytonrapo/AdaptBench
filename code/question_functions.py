@@ -11,8 +11,8 @@ def question_decomposer(question):
     return question_template
 
 def answering_code_builder(question, chart_data):
-    question_answering_code = remove_code_block_markers(call_gpt(answering_code_prompt + question + chart_data))
-    question_answering_code = clean_syntax_errors(question_answering_code)
+    question_answering_code = call_gpt(answering_code_prompt + question + chart_data)
+    question_answering_code = clean_code(question_answering_code)
 
     return question_answering_code
 

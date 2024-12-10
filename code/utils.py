@@ -7,53 +7,65 @@ from openai import OpenAI
 
 client = OpenAI()
 
-# From ChaptGPT
-def show_chart_img(chart_img):
-    # Decode the Base64 string into bytes
-    image_data = base64.b64decode(chart_img)
+###############################
+# GPT Call Functions
+###############################
 
-    # Convert the bytes to a PIL Image
-    image = Image.open(io.BytesIO(image_data))
+# Calls GPT with the given prompt and returns the string response
+def call_gpt(prompt):
+    response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {
+        "role": "user",
+        "content": [
+            {
+            "type": "text",
+            "text": prompt,
+            },
+        ],
+        }
+    ],
+    )
 
-    # clear the figure before loading the image (would still have the chart maybe)
-    plt.clf()
+    return response.choices[0].message.content
 
-    # Display the image using matplotlib
-    plt.imshow(image)
-    plt.axis('off')  # Hide axis for better visualization
-    plt.show()
+# Calls GPT with the given chart and prompt and returns the string response
+def call_gpt_chart_image(chart_img, prompt):
+    response = client.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {
+        "role": "user",
+        "content": [
+            {
+            "type": "text",
+            "text": prompt,
+            },
+            {
+            "type": "image_url",
+            "image_url": {
+                "url":  f"data:image/jpeg;base64,{chart_img}"
+            },
+            },
+        ],
+        }
+    ],
+    )
 
-# From ChatGPT
-def convert_plt_to_base64(plt):
-    # Step 1: Save the image to a BytesIO object
-    buffer = io.BytesIO()
-    plt.savefig(buffer, format="png")
-    buffer.seek(0)
+    return response.choices[0].message.content
 
-    # Step 2: Encode the image to base64
-    img_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+###############################
+# Code Clean-Up Functions
+###############################
 
-    return img_base64
+# Cleans up the code output from GPT
+def clean_code(code):
+    code = remove_code_block_markers(code)
+    code = clean_syntax_errors(code)
 
-# From ChatGPT
-def convert_pil_to_base64(img):
-    # Step 1: Save the image to a BytesIO object
-    buffer = io.BytesIO()
-    img.save(buffer, format="PNG")
-    buffer.seek(0)
-
-    # Step 2: Encode the image to base64
-    img_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
-
-    return img_base64
-
-# From ChatGPT
-# Function to encode the image
-def encode_image(image_path):
-  with open(image_path, "rb") as image_file:
-    return base64.b64encode(image_file.read()).decode('utf-8')
-
-# From ChatGPT
+# Removes the python code block indicator from the GPT output
+# Code from ChatGPT
 def remove_code_block_markers(text):
     if text.startswith("```python\n"):
         text = text[len("```python\n"):]
@@ -63,7 +75,8 @@ def remove_code_block_markers(text):
 
     return text
 
-# From ChatGPT
+# Closes open parantheses. GPT kept creating code that wouldn't compile
+# Code from ChatGPT
 def clean_syntax_errors(code):
     """
     Cleans up simple syntax mistakes in Python code.
@@ -90,78 +103,55 @@ def clean_syntax_errors(code):
 
     return clean_code
 
+###############################
+# Image Functions
+###############################
 
+# Opens the base64 chart image
+# Code from ChaptGPT
+def show_chart_img(chart_img):
+    # Decode the Base64 string into bytes
+    image_data = base64.b64decode(chart_img)
 
-def replace_show_with_save(code_str):
-    # Replace 'plt.show()' with 'plt.savefig("save_path")'
-    updated_code = code_str.replace("plt.show()", "return convert_plt_to_base64(plt)")
-    return updated_code
+    # Convert the bytes to a PIL Image
+    image = Image.open(io.BytesIO(image_data))
 
-def call_gpt(prompt):
-    response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
-        {
-        "role": "user",
-        "content": [
-            {
-            "type": "text",
-            "text": prompt,
-            },
-        ],
-        }
-    ],
-    )
+    # clear the figure before loading the image (would still have the chart maybe)
+    plt.clf()
 
-    return response.choices[0].message.content
+    # Display the image using matplotlib
+    plt.imshow(image)
+    plt.axis('off')  # Hide axis for better visualization
+    plt.show()
 
-def call_gpt_chart_image(chart_img, prompt):
-    response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
-        {
-        "role": "user",
-        "content": [
-            {
-            "type": "text",
-            "text": prompt,
-            },
-            {
-            "type": "image_url",
-            "image_url": {
-                "url":  f"data:image/jpeg;base64,{chart_img}"
-            },
-            },
-        ],
-        }
-    ],
-    )
+# Converts a matplotlib chart to a base64 image
+# Code from ChatGPT
+def convert_plt_to_base64(plt):
+    # Step 1: Save the image to a BytesIO object
+    buffer = io.BytesIO()
+    plt.savefig(buffer, format="png")
+    buffer.seek(0)
 
-    return response.choices[0].message.content
+    # Step 2: Encode the image to base64
+    img_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
 
-def call_gpt_chart_local(chart_path, prompt):
-    # Getting the base64 string
-    base64_image = encode_image(chart_path)
+    return img_base64
 
-    response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
-        {
-        "role": "user",
-        "content": [
-            {
-            "type": "text",
-            "text": prompt,
-            },
-            {
-            "type": "image_url",
-            "image_url": {
-                "url":  f"data:image/jpeg;base64,{base64_image}"
-            },
-            },
-        ],
-        }
-    ],
-    )
+# Converts a PIL Image to a base64 image
+# Code from ChatGPT
+def convert_pil_to_base64(img):
+    # Step 1: Save the image to a BytesIO object
+    buffer = io.BytesIO()
+    img.save(buffer, format="PNG")
+    buffer.seek(0)
 
-    return response.choices[0].message.content
+    # Step 2: Encode the image to base64
+    img_base64 = base64.b64encode(buffer.getvalue()).decode("utf-8")
+
+    return img_base64
+
+# Function to encode the image
+# Code from ChatGPT
+def encode_image(image_path):
+  with open(image_path, "rb") as image_file:
+    return base64.b64encode(image_file.read()).decode('utf-8')
