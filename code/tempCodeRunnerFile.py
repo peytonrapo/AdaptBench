@@ -1,0 +1,1 @@
+call_gpt_chart_image
