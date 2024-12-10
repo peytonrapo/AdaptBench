@@ -2,7 +2,7 @@ from code.chart_functions import *
 from code.question_functions import *
 
 # Takes in a chart base64 img and question string. Currently answer is not used.
-# Returns a new chart object, a new question string, and an answer string
+# Returns a new chart object, a new question string, and the new answer
 def modify_tuple(chart_img, question, debug=False):
     # New Chart
     new_chart_data, new_chart_code = chart_decomposer(chart_img)

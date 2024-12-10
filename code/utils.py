@@ -12,45 +12,76 @@ client = OpenAI()
 ###############################
 
 # Calls GPT with the given prompt and returns the string response
-def call_gpt(prompt):
-    response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
+def call_gpt(prompt, system_prompt=None):
+    messages = [
         {
-        "role": "user",
-        "content": [
-            {
-            "type": "text",
-            "text": prompt,
-            },
-        ],
+            "role": "user",
+            "content": [
+                {
+                "type": "text",
+                "text": prompt
+                }
+            ]
         }
-    ],
+    ]
+
+    if system_prompt:
+        messages = [
+            {
+                "role": "system",
+                "content": [
+                    {
+                    "type": "text",
+                    "text": system_prompt
+                    }
+                ]
+            }
+        ] + messages
+        
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=messages,
     )
 
     return response.choices[0].message.content
 
 # Calls GPT with the given chart and prompt and returns the string response
-def call_gpt_chart_image(chart_img, prompt):
-    response = client.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
+def call_gpt_chart_image(chart_img, prompt, system_prompt=None):
+    messages = [
         {
-        "role": "user",
-        "content": [
-            {
-            "type": "text",
-            "text": prompt,
-            },
-            {
-            "type": "image_url",
-            "image_url": {
-                "url":  f"data:image/jpeg;base64,{chart_img}"
-            },
-            },
-        ],
+            "role": "user",
+            "content": [
+                {
+                "type": "text",
+                "text": prompt
+                },
+                {
+                "type": "image_url",
+                "image_url": {
+                    "url":  f"data:image/jpeg;base64,{chart_img}"
+                }
+                },
+            ]
         }
-    ],
+    ]
+
+    if system_prompt:
+        messages = [
+            {
+                "role": "system",
+                "content": [
+                    {
+                    "type": "text",
+                    "text": system_prompt
+                    }
+                ]
+            }
+        ] + messages
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=messages,
     )
 
     return response.choices[0].message.content
@@ -63,6 +94,7 @@ def call_gpt_chart_image(chart_img, prompt):
 def clean_code(code):
     code = remove_code_block_markers(code)
     code = clean_syntax_errors(code)
+    return code
 
 # Removes the python code block indicator from the GPT output
 # Code from ChatGPT
