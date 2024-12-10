@@ -1,6 +1,7 @@
 from code.utils import *
 from code.prompts import *
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 
 # Takes in a base64 chart img and returns an approximate set of chart_data
@@ -22,7 +23,7 @@ def chart_builder(chart_data, chart_code):
     exec(chart_data, globals(), context)
     exec(chart_code, globals(), context)
 
-    chart_img = context["plot_chart"](context["chart_data"])
+    chart_img = convert_plt_to_base64(context["plot_chart"](context["chart_data"]))
     return chart_img
 
 # takes in a base64 chart img and will return the new_chart_img and the new_chart_data
@@ -31,4 +32,4 @@ def chart_modifier(chart_img):
 
     new_chart_img = chart_builder(new_chart_data, new_chart_code)
 
-    return new_chart_img, new_chart_data
+    return new_chart_img, new_chart_data, new_chart_code

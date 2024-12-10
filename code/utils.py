@@ -67,19 +67,6 @@ def clean_syntax_errors(code):
     :param code: str - The Python code to clean.
     :return: str - Cleaned Python code.
     """
-    # Fix missing colons in function definitions and loops
-    code = re.sub(r'(def\s+\w+\(.*?\))\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(for\s+.+?\s+in\s+.+?)\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(if\s+.+?)\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(elif\s+.+?)\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(else)\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(while\s+.+?)\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(try)\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(except\s+.+?)\s*$', r'\1:', code, flags=re.M)
-    code = re.sub(r'(finally)\s*$', r'\1:', code, flags=re.M)
-
-    # Fix inconsistent indentation (convert tabs to 4 spaces)
-    code = code.replace('\t', '    ')
 
     # Fix unmatched parentheses
     open_paren = 0
