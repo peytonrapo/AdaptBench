@@ -15,6 +15,9 @@ def show_chart_img(chart_img):
     # Convert the bytes to a PIL Image
     image = Image.open(io.BytesIO(image_data))
 
+    # clear the figure before loading the image (would still have the chart maybe)
+    plt.clf()
+
     # Display the image using matplotlib
     plt.imshow(image)
     plt.axis('off')  # Hide axis for better visualization

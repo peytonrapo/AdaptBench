@@ -23,13 +23,7 @@ def chart_builder(chart_data, chart_code):
     exec(chart_data, globals(), context)
     exec(chart_code, globals(), context)
 
+    # clear plt before creating the chart on it.
+    plt.clf()
     chart_img = convert_plt_to_base64(context["plot_chart"](context["chart_data"]))
     return chart_img
-
-# takes in a base64 chart img and will return the new_chart_img and the new_chart_data
-def chart_modifier(chart_img):
-    new_chart_data, new_chart_code = chart_decomposer(chart_img)
-
-    new_chart_img = chart_builder(new_chart_data, new_chart_code)
-
-    return new_chart_img, new_chart_data, new_chart_code
