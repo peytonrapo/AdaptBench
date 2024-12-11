@@ -3,40 +3,44 @@ import io
 import re
 from PIL import Image
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
 from openai import OpenAI
 
 client = OpenAI()
+
+max_attempts = 10
 
 ###############################
 # GPT Call Functions
 ###############################
 
 # Calls GPT with the given prompt and returns the string response
-def call_gpt(prompt, system_prompt=None):
-    messages = [
-        {
-            "role": "user",
-            "content": [
+def call_gpt(prompt, chart_img = None, system_prompt=None):
+    content = [
                 {
                 "type": "text",
                 "text": prompt
                 }
             ]
+    
+    if chart_img:
+        content.append({
+                "type": "image_url",
+                "image_url": {
+                    "url":  f"data:image/jpeg;base64,{chart_img}"
+                }
+                })
+    
+    messages = [
+        {
+            "role": "user",
+            "content": content
         }
     ]
 
     if system_prompt:
-        # messages = [
-        #     {
-        #         "role": "system",
-        #         "content": [
-        #             {
-        #             "type": "text",
-        #             "text": system_prompt
-        #             }
-        #         ]
-        #     }
-        # ] + messages
         messages.append({
                 "role": "system",
                 "content": [
@@ -55,58 +59,32 @@ def call_gpt(prompt, system_prompt=None):
 
     return response.choices[0].message.content
 
-# Calls GPT with the given chart and prompt and returns the string response
-def call_gpt_chart_image(chart_img, prompt, system_prompt=None):
-    messages = [
-        {
-            "role": "user",
-            "content": [
-                {
-                "type": "text",
-                "text": prompt
-                },
-                {
-                "type": "image_url",
-                "image_url": {
-                    "url":  f"data:image/jpeg;base64,{chart_img}"
-                }
-                },
-            ]
-        }
-    ]
-
-    if system_prompt:
-        # messages = [
-        #     {
-        #         "role": "system",
-        #         "content": [
-        #             {
-        #             "type": "text",
-        #             "text": system_prompt
-        #             }
-        #         ]
-        #     }
-        # ] + messages
-        messages.append({
-                "role": "system",
-                "content": [
-                    {
-                    "type": "text",
-                    "text": system_prompt
-                    }
-                ]
-            })
-
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=messages,
-    )
-
-    return response.choices[0].message.content
-
 ###############################
-# Code Clean-Up Functions
+# Code Functions
 ###############################
+
+# Returns None if code correctly compiles otherwise it returns the error
+def test_code_compiles(code):
+    try:
+        context = {}
+        exec(code, globals(), context)
+        return None
+    except Exception as e:
+        print(f"Code failed with error: {e}. Code: {code}")
+        return e
+    
+# Returns None if function code correctly runs while accepting the parameter code otherwise it returns the error
+def test_function_accepts_parameter(function_code, parameter_code, function_name, parameter_name):
+    try:
+        context = {}
+        exec(function_code, globals(), context)
+        exec(parameter_code, globals(), context)
+
+        context[function_name](parameter_name)
+        return None
+    except Exception as e:
+        print(f"function {function_name} failed to accept {parameter_name} with error: {e}. Function: {function_code}. Parameter: {parameter_code}")
+        return e
 
 # Cleans up the code output from GPT
 def clean_code(code):
