@@ -1,1 +1,2 @@
-original_chart_images
+
+tuple_indices = r.sample(range(len(question_tuples)), num_samples)

@@ -22,9 +22,11 @@ failed_question_tuple_indices_path = "experiment_data"
 
 # num_samples = 5
 # tuple_indices = r.sample(range(len(question_tuples)), num_samples)
-tuple_indices = range(len(question_tuples))
+tuple_indices = [0]
+# tuple_indices = range(len(question_tuples))
 
-debug = False
+debug = True
+save = False
 
 failed_question_tuple_indices = {}
 
@@ -39,30 +41,31 @@ for tuple_idx in tuple_indices:
     try:
         new_chart_img, new_question, new_answer, metrics = modify_tuple(old_chart_img, old_question, debug)
 
-        # save old chart image
-        save_chart_image(old_chart_img, old_chart_image_path + "/" + question_tuple_pid + ".png")
+        if save:
+            # save old chart image
+            save_chart_image(old_chart_img, old_chart_image_path + "/" + question_tuple_pid + ".png")
 
-        # save new chart image
-        save_chart_image(new_chart_img, new_chart_image_path + "/" + question_tuple_pid + ".png")
+            # save new chart image
+            save_chart_image(new_chart_img, new_chart_image_path + "/" + question_tuple_pid + ".png")
 
-        metadata = {
-            "original_chart_path": old_chart_image_path + "/" + question_tuple_pid,
-            "original_question": old_question,
-            "original_answer": str(old_answer),
-            "metrics": metrics
-        }
+            metadata = {
+                "original_chart_path": old_chart_image_path + "/" + question_tuple_pid,
+                "original_question": old_question,
+                "original_answer": str(old_answer),
+                "metrics": metrics
+            }
 
-        new_question_tuple = {
-            "chart_path": new_chart_image_path + "/" + question_tuple_pid,
-            "question": new_question,
-            "answer": str(new_answer),
-            "pid": question_tuple_pid,
-            "metadata": metadata
-        }
+            new_question_tuple = {
+                "chart_path": new_chart_image_path + "/" + question_tuple_pid,
+                "question": new_question,
+                "answer": str(new_answer),
+                "pid": question_tuple_pid,
+                "metadata": metadata
+            }
 
-        # save the new question tuple
-        with open(new_question_tuple_path + "/" + question_tuple_pid + ".json", "w") as file:
-            json.dump(new_question_tuple, file, indent=4) 
+            # save the new question tuple
+            with open(new_question_tuple_path + "/" + question_tuple_pid + ".json", "w") as file:
+                json.dump(new_question_tuple, file, indent=4) 
             
         if debug:
             print(f"Question Tuple: {tuple_idx}")
@@ -79,6 +82,7 @@ for tuple_idx in tuple_indices:
         print(f"Question Tuple {tuple_idx} failed with error: {e}")
         failed_question_tuple_indices[tuple_idx] = str(e)
 
-# save the failed tuple indices
-with open(failed_question_tuple_indices_path + "/failed_question_tuple_indices.json", "w") as file:
-    json.dump(failed_question_tuple_indices, file, indent=4) 
+if save:
+    # save the failed tuple indices
+    with open(failed_question_tuple_indices_path + "/failed_question_tuple_indices.json", "w") as file:
+        json.dump(failed_question_tuple_indices, file, indent=4) 
