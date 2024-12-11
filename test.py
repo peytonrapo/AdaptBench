@@ -16,8 +16,7 @@ for data in dataset["testmini"]:
 max_attempts = 10
 num_samples = 10
 
-# tuple_indices = r.sample(range(len(question_tuples)), num_samples)
-tuple_indices = [92]
+tuple_indices = r.sample(range(len(question_tuples)), num_samples)
 
 for tuple_idx in tuple_indices:
     old_chart = question_tuples[tuple_idx]['decoded_image']
@@ -25,19 +24,11 @@ for tuple_idx in tuple_indices:
     old_question = question_tuples[tuple_idx]['question']
     old_answer = question_tuples[tuple_idx]['answer']
 
-    # par: May be worth putting this try / except loop in each of the components
-    #      of the system or find a way to cache GPT calls in order to save $$$
-    #      May need to be able to indentify which part of the code went wrong tho
-    for attempt in range(max_attempts):
-        try:
-            new_chart_img, new_question, new_answer = modify_tuple(old_chart_img, old_question, True)
-            break
-        except Exception as e:
-            print(f"Question Tuple {tuple_idx} Attempt {attempt} failed with error: {e}")
-            # aka on last attempt
-            if attempt == max_attempts - 1:
-                raise RuntimeError(f"Max number of attempts failed for question tuple: {question_tuples[tuple_idx]}")  
-
+    try:
+        new_chart_img, new_question, new_answer = modify_tuple(old_chart_img, old_question, False)
+    except Exception as e:
+        print(f"Question Tuple {tuple_idx} failed with error: {e}")
+        
     print(f"Question Tuple: {tuple_idx}")
     print("Original Question: " + old_question)
     print("Original Answer:" + str(old_answer))

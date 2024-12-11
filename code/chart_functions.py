@@ -21,7 +21,7 @@ def get_chart_data(chart_img):
             attempt += 1
         
         # Send code and error message to GPT to try to get a fixed answer
-        error_prompt = compilation_error_prompt + chart_data + compilation_error
+        error_prompt = compilation_error_prompt + chart_data + str(compilation_error)
         system_prompt = compilation_error_system_prompt + chart_data_prompt+chart_data_system_prompt
 
         chart_data = call_gpt(error_prompt, chart_img=chart_img, system_prompt=system_prompt)
@@ -56,23 +56,22 @@ def get_chart_code(chart_img, chart_data):
 
         # Send code and error message to GPT to try to get a fixed answer
         if compilation_error:
-            error_prompt = compilation_error_prompt + chart_code + compilation_error
-            system_prompt = compilation_error_system_prompt+original_prompt
+            error_prompt = compilation_error_prompt + chart_code + str(compilation_error)
+            system_prompt = compilation_error_system_prompt + original_prompt
 
             chart_code = call_gpt(error_prompt, system_prompt=system_prompt)
             chart_code = clean_code(chart_code)
 
-            compilation_error = test_code_compiles(chart_code)
         else: # runtime error
-            error_prompt = runtime_error + chart_code + chart_data + runtime_error
+            error_prompt = runtime_error_prompt + chart_code + chart_data + str(runtime_error)
             system_prompt = runtime_error_system_prompt+original_prompt
 
             chart_code = call_gpt(error_prompt, system_prompt=system_prompt)
             chart_code = clean_code(chart_code)
 
-            compilation_error = test_code_compiles(chart_code)
-            if compilation_error is None:
-                runtime_error = test_function_accepts_parameter(chart_code, chart_data, "plot_chart", "chart_data")
+        compilation_error = test_code_compiles(chart_code)
+        if compilation_error is None:
+            runtime_error = test_function_accepts_parameter(chart_code, chart_data, "plot_chart", "chart_data")
 
     return chart_code
 

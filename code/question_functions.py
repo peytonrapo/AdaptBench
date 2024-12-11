@@ -36,27 +36,27 @@ def get_question_answering_code(intermediate_question, chart_data):
         else:
             attempt += 1
         
+        print(f"Attempt: {attempt} Code: {question_answering_code}")
+
         original_prompt = answering_code_prompt + intermediate_question + chart_data + answering_code_system_prompt
 
         # Send code and error message to GPT to try to get a fixed answer
         if compilation_error:
-            error_prompt = compilation_error_prompt + question_answering_code + compilation_error
+            error_prompt = compilation_error_prompt + question_answering_code + str(compilation_error)
             system_prompt = compilation_error_system_prompt+original_prompt
-            
+
             question_answering_code = call_gpt(error_prompt, system_prompt=system_prompt)
             question_answering_code = clean_code(question_answering_code)
-
-            compilation_error = test_code_compiles(question_answering_code)
         else: # runtime error
-            error_prompt = runtime_error + question_answering_code + chart_data + runtime_error
+            error_prompt = runtime_error_prompt + question_answering_code + chart_data + str(runtime_error)
             system_prompt = runtime_error_system_prompt+original_prompt
 
             question_answering_code = call_gpt(error_prompt, system_prompt=system_prompt)
             question_answering_code = clean_code(question_answering_code)
 
-            compilation_error = test_code_compiles(question_answering_code)
-            if compilation_error is None:
-                runtime_error = test_function_accepts_parameter(question_answering_code, chart_data, "answer_question", "chart_data")
+        compilation_error = test_code_compiles(question_answering_code)
+        if compilation_error is None:
+            runtime_error = test_function_accepts_parameter(question_answering_code, chart_data, "answer_question", "chart_data")
 
     return question_answering_code
 

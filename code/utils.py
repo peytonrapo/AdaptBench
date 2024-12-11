@@ -70,7 +70,6 @@ def test_code_compiles(code):
         exec(code, globals(), context)
         return None
     except Exception as e:
-        print(f"Code failed with error: {e}. Code: {code}")
         return e
     
 # Returns None if function code correctly runs while accepting the parameter code otherwise it returns the error
@@ -80,10 +79,9 @@ def test_function_accepts_parameter(function_code, parameter_code, function_name
         exec(function_code, globals(), context)
         exec(parameter_code, globals(), context)
 
-        context[function_name](parameter_name)
+        context[function_name](context[parameter_name])
         return None
     except Exception as e:
-        print(f"function {function_name} failed to accept {parameter_name} with error: {e}. Function: {function_code}. Parameter: {parameter_code}")
         return e
 
 # Cleans up the code output from GPT
@@ -145,7 +143,7 @@ def show_chart_img(chart_img):
     image = Image.open(io.BytesIO(image_data))
 
     # clear the figure before loading the image (would still have the chart maybe)
-    plt.clf()
+    plt.close()
 
     # Display the image using matplotlib
     plt.imshow(image)
