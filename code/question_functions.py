@@ -36,8 +36,6 @@ def get_question_answering_code(intermediate_question, chart_data):
         else:
             attempt += 1
         
-        print(f"Attempt: {attempt} Code: {question_answering_code}")
-
         original_prompt = answering_code_prompt + intermediate_question + chart_data + answering_code_system_prompt
 
         # Send code and error message to GPT to try to get a fixed answer

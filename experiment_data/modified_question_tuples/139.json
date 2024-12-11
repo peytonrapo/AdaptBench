@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/139",
+    "question": "Is the value of Indigo at an x-axis label of 70 the lowest compared to other colors?",
+    "answer": "False",
+    "pid": "139",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/139",
+        "original_question": "Does Indigo have the lowest value?",
+        "original_answer": "no",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

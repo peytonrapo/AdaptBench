@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/442",
+    "question": "How many objects are favored by more than 6 individuals in at least one category?",
+    "answer": "3",
+    "pid": "442",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/442",
+        "original_question": "How many objects are preferred by more than 7 people in at least one category?",
+        "original_answer": "3",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

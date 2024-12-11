@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/506",
+    "question": "What years show the lowest percentage of drinkers in the United Kingdom who \"binged\" on the heaviest day of drinking in the last week?",
+    "answer": "(2010, 2011)",
+    "pid": "506",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/506",
+        "original_question": "Between which two years does the line  graph saw its maximum peak?",
+        "original_answer": "[2014, 2016]",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

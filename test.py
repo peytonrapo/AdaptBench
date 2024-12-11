@@ -77,7 +77,7 @@ for tuple_idx in tuple_indices:
 
     except Exception as e:
         print(f"Question Tuple {tuple_idx} failed with error: {e}")
-        failed_question_tuple_indices[tuple_idx] = e
+        failed_question_tuple_indices[tuple_idx] = str(e)
 
 # save the failed tuple indices
 with open(failed_question_tuple_indices_path + "/failed_question_tuple_indices.json", "w") as file:

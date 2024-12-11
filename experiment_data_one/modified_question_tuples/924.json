@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/924",
+    "question": "Does the color 'Cyan' have the highest area under the curve (AUC) compared to other colors?",
+    "answer": "False",
+    "pid": "924",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/924",
+        "original_question": "Does Periwinkle have the maximum area under the curve?",
+        "original_answer": "yes",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

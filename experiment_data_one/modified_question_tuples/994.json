@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/994",
+    "question": "Is the maximum value of Medium Turquoise greater than the maximum value of Web Maroon in the given dataset?",
+    "answer": "True",
+    "pid": "994",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/994",
+        "original_question": "Is Magenta greater than Web Maroon?",
+        "original_answer": "yes",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

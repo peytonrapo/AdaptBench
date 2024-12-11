@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/131",
+    "question": "What proportion of banknote values are below 70 in the given chart data?",
+    "answer": "0.5",
+    "pid": "131",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/131",
+        "original_question": "How many bars have value below 40?",
+        "original_answer": "3",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

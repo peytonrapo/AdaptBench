@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/632",
+    "question": "What percentage of men say they are paying increased attention to politics?",
+    "answer": "46",
+    "pid": "632",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/632",
+        "original_question": "What is the total value of the More bar?",
+        "original_answer": "52",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

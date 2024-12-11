@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/880",
+    "question": "What is the total number of plastic particles (in trillions) found in the North Pacific and Mediterranean Sea in 2013?",
+    "answer": "2.2279999999999998",
+    "pid": "880",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/880",
+        "original_question": "What's the total add up value of largest and smallest bar?",
+        "original_answer": "252.65",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

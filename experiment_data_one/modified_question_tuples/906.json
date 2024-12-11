@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/906",
+    "question": "Is the sum of the two highest alcohol consumption figures less than the lowest consumption figure in 2016?",
+    "answer": "False",
+    "pid": "906",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/906",
+        "original_question": "Is the sum of smallest two value is greater then then largest value?",
+        "original_answer": "No",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

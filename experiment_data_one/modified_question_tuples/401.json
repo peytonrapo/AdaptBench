@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/401",
+    "question": "What is the maximum value of the \"offer\" category in the chart?",
+    "answer": "1000000000.0",
+    "pid": "401",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/401",
+        "original_question": "What is the value of the smallest individual bar in the whole chart?",
+        "original_answer": "1",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

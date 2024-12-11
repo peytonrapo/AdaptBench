@@ -87,19 +87,51 @@ def test_function_accepts_parameter(function_code, parameter_code, function_name
 # Cleans up the code output from GPT
 def clean_code(code):
     code = remove_code_block_markers(code)
+    code = remove_plt_display_code(code)
     code = clean_syntax_errors(code)
     return code
 
 # Removes the python code block indicator from the GPT output
 # Code from ChatGPT
-def remove_code_block_markers(text):
-    if text.startswith("```python\n"):
-        text = text[len("```python\n"):]
+def remove_code_block_markers(code):
+    if code.startswith("```python\n"):
+        code = code[len("```python\n"):]
 
-    if text.endswith("```"):
-        text = text[:-3]
+    if code.endswith("```"):
+        code = code[:-3]
 
-    return text
+    return code
+
+# From ChatGPT
+def remove_plt_display_code(code):
+    """
+    Remove any lines of code related to displaying or saving figures in Matplotlib.
+
+    Parameters:
+        code_string (str): The input Python code as a string.
+
+    Returns:
+        str: The modified code with display-related lines removed.
+    """
+    # Regular expression to match plt.show(), plt.savefig(), plt.close(), etc.
+    display_patterns = [
+        r"plt\.show\(.*?\)",  # Matches plt.show() with or without arguments
+        r"plt\.savefig\(.*?\)",  # Matches plt.savefig() with arguments
+        r"plt\.close\(.*?\)",  # Matches plt.close() with or without arguments
+        r"plt\.figure\(.*?\)"  # Matches plt.figure() with or without arguments
+    ]
+
+    # Combine patterns into one
+    combined_pattern = "|".join(display_patterns)
+
+    # Remove lines matching the patterns
+    modified_code = re.sub(combined_pattern, "", code, flags=re.MULTILINE)
+
+    # Remove empty lines that may result
+    modified_code = re.sub(r"^\s*\n", "", modified_code, flags=re.MULTILINE)
+
+    return modified_code
+
 
 # Closes open parantheses. GPT kept creating code that wouldn't compile
 # Code from ChatGPT
@@ -142,8 +174,8 @@ def show_chart_img(chart_img):
     # Convert the bytes to a PIL Image
     image = Image.open(io.BytesIO(image_data))
 
-    # clear the figure before loading the image (would still have the chart maybe)
-    plt.close()
+    # # clear the figure before loading the image (would still have the chart maybe)
+    # plt.close()
 
     # Display the image using matplotlib
     plt.imshow(image)

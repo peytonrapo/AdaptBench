@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/465",
+    "question": "Which color has the highest median value on the x-axis and is it equal to the median value?",
+    "answer": "('Coral', None)",
+    "pid": "465",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/465",
+        "original_question": "Is Light Green the low median?",
+        "original_answer": "yes",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

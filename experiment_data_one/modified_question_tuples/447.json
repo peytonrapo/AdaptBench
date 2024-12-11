@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/447",
+    "question": "Do the values of the Coral series intersect with the values of the Purple series at any point?",
+    "answer": "True",
+    "pid": "447",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/447",
+        "original_question": "Does Midnight Blue intersect Purple?",
+        "original_answer": "no",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

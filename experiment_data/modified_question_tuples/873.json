@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/873",
+    "question": "How many unique categories have a sketch value greater than 50?",
+    "answer": "3",
+    "pid": "873",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/873",
+        "original_question": "How many groups of bars contain at least one bar with value smaller than 40?",
+        "original_answer": "3",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

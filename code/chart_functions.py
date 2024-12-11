@@ -44,6 +44,7 @@ def get_chart_code(chart_img, chart_data):
     # Want to only really test for runtime errors if it compiles
     if compilation_error is None:
         runtime_error = test_function_accepts_parameter(chart_code, chart_data, "plot_chart", "chart_data")
+        plt.close() # close whatever chart it attempted to make
 
     attempt = 0
     while compilation_error or runtime_error:
@@ -72,6 +73,7 @@ def get_chart_code(chart_img, chart_data):
         compilation_error = test_code_compiles(chart_code)
         if compilation_error is None:
             runtime_error = test_function_accepts_parameter(chart_code, chart_data, "plot_chart", "chart_data")
+            plt.close() # close whatever chart it attempted to make
 
     return chart_code, attempt
 
@@ -82,7 +84,6 @@ def get_chart_img(chart_data, chart_code):
     exec(chart_data, globals(), context)
     exec(chart_code, globals(), context)
 
-    # clear plt before creating the chart on it.
-    plt.clf()
     chart_img = convert_plt_to_base64(context["plot_chart"](context["chart_data"]))
+    plt.close() # close the chart that isn't shown
     return chart_img

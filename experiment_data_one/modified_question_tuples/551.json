@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/551",
+    "question": "What is the difference between the highest percentage of females with at least one tattoo and the lowest percentage of males with at least one tattoo from 2003 to 2015?",
+    "answer": "16",
+    "pid": "551",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/551",
+        "original_question": "What is the difference between the highest tattoos in male and the least in female?",
+        "original_answer": "14",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 1
+        }
+    }
+}

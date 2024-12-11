@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/423",
+    "question": "Are all values of \"Dark Olive\" less than the corresponding values of \"Medium Turquoise\"?",
+    "answer": "True",
+    "pid": "423",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/423",
+        "original_question": "Is Deep Pink less than Dark Gray?",
+        "original_answer": "no",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

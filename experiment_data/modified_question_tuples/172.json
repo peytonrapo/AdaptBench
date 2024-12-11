@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/172",
+    "question": "Which value is greater: Forest Green or Saddle Brown?",
+    "answer": "False",
+    "pid": "172",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/172",
+        "original_question": "Is Light Seafoam less than Dark Salmon?",
+        "original_answer": "no",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}
