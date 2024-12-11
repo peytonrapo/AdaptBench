@@ -29,7 +29,7 @@ def get_chart_data(chart_img):
 
         compilation_error = test_code_compiles(chart_data)
 
-    return chart_data
+    return chart_data, attempt
 
 # Takes in a base64 chart img and a pandas data frame and returns the code needed
 # to render a chart in the style of chart_img
@@ -73,7 +73,7 @@ def get_chart_code(chart_img, chart_data):
         if compilation_error is None:
             runtime_error = test_function_accepts_parameter(chart_code, chart_data, "plot_chart", "chart_data")
 
-    return chart_code
+    return chart_code, attempt
 
 # takes in chart_data and chart_code and returns a base64 chart img
 def get_chart_img(chart_data, chart_code):

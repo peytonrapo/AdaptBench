@@ -58,7 +58,7 @@ def get_question_answering_code(intermediate_question, chart_data):
         if compilation_error is None:
             runtime_error = test_function_accepts_parameter(question_answering_code, chart_data, "answer_question", "chart_data")
 
-    return question_answering_code
+    return question_answering_code, attempt
 
 # Takes in a chart image and the code used to answer a question and returns the
 # question being asked of the chart

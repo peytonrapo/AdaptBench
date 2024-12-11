@@ -150,6 +150,17 @@ def show_chart_img(chart_img):
     plt.axis('off')  # Hide axis for better visualization
     plt.show()
 
+# Code from ChatGPT
+def save_chart_image(chart_img, output_path):
+    # Decode the Base64 string
+    image_data = base64.b64decode(chart_img)
+
+    # Write the binary data to the specified file location
+    with open(output_path, "wb") as file:
+        file.write(image_data)
+
+    print(f"PNG image saved to {output_path}")
+
 # Converts a matplotlib chart to a base64 image
 # Code from ChatGPT
 def convert_plt_to_base64(plt):

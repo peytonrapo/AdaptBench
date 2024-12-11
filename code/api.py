@@ -4,19 +4,9 @@ from code.question_functions import *
 # Takes in a chart base64 img and question string. Currently answer is not used.
 # Returns a new chart object, a new question string, and the new answer
 def modify_tuple(chart_img, question, debug=False):
-    """
-    Trying to optimize for API calls, order is as follows:
-    - Chart Decomposer
-    - Question Decomposer
-    - Answering Code Builder
-    - Answer Builder
-    - Chart Builder
-    - Question Builder
-    """
-    
     # New Chart Data
     # Verification: New Chart Data Compiles. Recomputes otherwise
-    new_chart_data = get_chart_data(chart_img)
+    new_chart_data, chart_data_retries = get_chart_data(chart_img)
     if debug: print("New chart data: " + new_chart_data)
 
     # Question Template
@@ -32,13 +22,13 @@ def modify_tuple(chart_img, question, debug=False):
     # Answering Code
     # Verification: Answering Code compiles. Recomputes otherwise
     # Verification: Answering Code works with New Chart Data as an input. Modifies Answering Code otherwise
-    answering_code = get_question_answering_code(intermediate_question, new_chart_data)
+    answering_code, answer_code_retries = get_question_answering_code(intermediate_question, new_chart_data)
     if debug: print("Answering code: " + answering_code)
 
     # New Chart Code
     # Verification: New Chart Code Compiles. Recomputes New Chart Code otherwise
     # Verification: New Chart Code works with New Chart Data as an input. Modifies New Chart Code otherwise
-    new_chart_code = get_chart_code(chart_img, new_chart_data)
+    new_chart_code, chart_code_retries = get_chart_code(chart_img, new_chart_data)
     if debug: print("New chart code: " + new_chart_code)
 
     # New Chart Image
@@ -53,4 +43,10 @@ def modify_tuple(chart_img, question, debug=False):
     new_answer = get_answer(answering_code, new_chart_data)
     if debug: print("New answer" + str(new_answer))
 
-    return new_chart_img, new_question, new_answer
+    metrics = {
+        "chart_data_retries": chart_data_retries, 
+        "answering_code_retries": answer_code_retries, 
+        "chart_code_retries": chart_code_retries
+    }
+
+    return new_chart_img, new_question, new_answer, metrics
