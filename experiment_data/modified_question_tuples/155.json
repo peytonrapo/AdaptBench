@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/155",
+    "question": "Which series has the minimum area under the curve: 'Web Green' or 'Indigo'?",
+    "answer": "The series 'Web Green' does not have the minimum area under the curve compared to the 'Indigo' series.",
+    "pid": "155",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/155",
+        "original_question": "Does Web Green have the minimum area under the curve?",
+        "original_answer": "yes",
+        "metrics": {
+            "chart_data_retries": 5,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}

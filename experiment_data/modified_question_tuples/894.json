@@ -1,0 +1,16 @@
+{
+    "chart_path": "experiment_data/modified_chart_images/894",
+    "question": "What is the total accuracy of the selected algorithms from the chart?",
+    "answer": "36",
+    "pid": "894",
+    "metadata": {
+        "original_chart_path": "experiment_data/original_chart_images/894",
+        "original_question": "What is the sum of the accuracies of the algorithms fat and acre?",
+        "original_answer": "9",
+        "metrics": {
+            "chart_data_retries": 0,
+            "answering_code_retries": 0,
+            "chart_code_retries": 0
+        }
+    }
+}
