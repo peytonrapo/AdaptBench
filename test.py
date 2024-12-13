@@ -20,9 +20,9 @@ new_chart_image_path = "experiment_data/modified_chart_images"
 new_question_tuple_path = "experiment_data/modified_question_tuples"
 failed_question_tuple_indices_path = "experiment_data"
 
-# num_samples = 5
-# tuple_indices = r.sample(range(len(question_tuples)), num_samples)
-tuple_indices = [0]
+num_samples = 1
+tuple_indices = r.sample(range(len(question_tuples)), num_samples)
+# tuple_indices = [0]
 # tuple_indices = range(len(question_tuples))
 
 debug = True
